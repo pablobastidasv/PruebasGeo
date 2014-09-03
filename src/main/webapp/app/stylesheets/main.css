@@ -1,0 +1,29 @@
+@import url("http://fonts.googleapis.com/css?family=Droid+Sans");
+body {
+  font-family: 'Droid Sans';
+  font-size: 16px;
+}
+.blog-post-list {
+  list-style-type: none;
+}
+.blog-post-list .blog-post-link {
+  margin: 0.5em 0 1em 0;
+  padding: 0 0 0.25em 0;
+  border-bottom: 1px solid #ddd;
+}
+.comments .comments-list {
+  list-style-type: none;
+}
+.comments .comments-list .comment-item {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 0.5em;
+  margin: 0.5em;
+}
+.comments .comments-list .comment-item .comment-author {
+  font-family: 'Droid Sans';
+  font-weight: bold;
+}
+.comments .comments-list .comment-item .comment-body {
+  font-style: italic;
+}
