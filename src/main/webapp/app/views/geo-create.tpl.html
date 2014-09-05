@@ -1,0 +1,36 @@
+<leaflet height="240px"  markers="markers" ></leaflet>
+
+<br/>
+
+<section>
+    <form name="createPunto" role="form" ng-submit="geocreate.create()">
+        <fieldset class="form-group">
+            <input class="form-control input-lg"
+                   type="text"
+                   placeholder="Nombre de la ubicación"
+                   ng-model="geocreate.punto.nombre"
+                   required="required">
+        </fieldset>
+        <fieldset class="form-group">
+            <input class="form-control input-lg"
+                   type="number"
+                   placeholder="Longitud de la ubicacion"
+                   ng-model="geocreate.punto.lng"
+                   required="required"
+                   ng-readonly="true">
+        </fieldset>
+        <fieldset class="form-group">
+            <input class="form-control input-lg"
+                   type="number"
+                   placeholder="Latitude de la ubicacion"
+                   ng-model="geocreate.punto.lat"
+                   required="required"
+                   ng-readonly="true">
+        </fieldset>
+        <hr>
+        <button class="btn btn-primary btn-lg"
+                type="submit" ng-disabled="!createPunto.$valid">
+            <span class="fa fa-rocket"> Crear</span>
+        </button>
+    </form>
+</section>

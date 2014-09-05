@@ -29,11 +29,11 @@
                 marker.moveTo(opx) ;
 
                 var latlongMap = map.getLonLatFromLayerPx(e.xy);
-                console.log(latlongMap.lat + " - " + latlongMap.lon);
+                console.log(latlongMap.lat + " - " + latlongMap.lng);
 
                 var latlonHum = latlongMap.clone().transform( toProjection, fromProjection);
 
-                console.log(latlonHum.lat+" - "+latlonHum.lon);
+                console.log(latlonHum.lat+" - "+latlonHum.lng);
             });
         }
     </script>

@@ -12,7 +12,7 @@
                 controller: 'GeoListCtrl',
                 controllerAs: 'geolist'
             })
-            .when('/post/:postId',{
+            .when('/geo/:geoId',{
                 templateUrl: '/views/geo-cercanos.tpl.html',
                 controller: 'GeoCercanosCtrl',
                 controllerAs: 'geodetail'

@@ -9,6 +9,7 @@
     <!-- Coloca favicon.ico y apple-touch-icon(s) en el directorio raíz -->
     <!-- bower:css -->
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="lib/leaflet/dist/leaflet.css" />
     <!-- endbower -->
     <!-- inject:css -->
     <link rel="stylesheet" href="/stylesheets/main.css">
@@ -27,7 +28,10 @@
 <div class="container-fluid">
     <div class="row">
         <aside class="col-sm-2">
-            <a ng-href="/new">Crear Entrada</a>
+            <ul class="nav nav-pills nav-stacked">
+                <li><a ng-href="/">Home</a></li>
+                <li><a ng-href="/new">Crear ubicación</a></li>
+            </ul>
         </aside>
         <section class="col-sm-9" ng-view></section>
     </div>
@@ -41,6 +45,8 @@
 <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
 <script src="lib/angular-route/angular-route.js"></script>
 <script src="lib/angular-resource/angular-resource.js"></script>
+<script src="lib/leaflet/dist/leaflet.js"></script>
+<script src="lib/angular-leaflet/dist/angular-leaflet-directive.js"></script>
 <!-- endbower -->
 <!-- inject:js -->
 <script src="/scripts/apps.js"></script>

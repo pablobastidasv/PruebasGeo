@@ -1,43 +1,66 @@
-(function(){
+(function () {
     'use strict';
 
-    angular.module('geo.controllers', ['geo.services']);
+    angular.module('geo.controllers', ['geo.services', 'leaflet-directive']);
 
-    function GeoListCtrl(Geo){
+    function GeoListCtrl(Geo) {
         this.puntos = Geo.query();
     }
 
-//    function PostDetailCtrl ($routeParams, Post, Comment, User){
-//        this.post = {};
-//        this.comments = {};
-//        this.user = {};
-//
-//        var self = this;
-//
-//        this.post = Post.query({id:$routeParams.postId})
-//                        .$promise.then(
-//                            // Success
-//                            function(data){
-//                                self.post = data[0];
-//                                self.user = User.query({id:self.post.userId});
-//                            }
-//                        );
-//
-//        this.comments = Comment.query({ postId : $routeParams.postId});
-//    }
-//
-//    function PostCreateCtrl(Post){
-//        var self = this;
-//
-//        this.create = function(){
-//            Post.save(self.post);
-//        };
-//    }
-//
+    function GeoCercanosCtrl ($routeParams, $scope, Geo){
+        var self = this;
+        Geo.query({id:$routeParams.geoId})
+            .$promise.then(
+                function(data){
+                    self.puntos = data;
+
+                    $scope.$on('leafletDirectiveMap.load', function(){
+                        $scope.markers.push(self.puntos);
+                    });
+                }
+        );
+    }
+
+    function GeoCreateCtrl($scope, Geo) {
+        var self = this;
+        self.punto = {};
+
+        this.create = function () {
+            Geo.save(self.punto);
+
+            delMarkers();
+            self.punto = {};
+        };
+
+        // evento onclic sobre el mapa
+        $scope.$on('leafletDirectiveMap.click', function (e, args) {
+            self.punto.lat = args.leafletEvent.latlng.lat;
+            self.punto.lng = args.leafletEvent.latlng.lng;
+
+            addMarkers();
+        });
+
+        // Método para borrar el marcador del mapa
+        var delMarkers = function () {
+            angular.extend($scope, {
+                markers: {}
+            });
+        };
+
+        // Adicoinar el marcador al mapa
+        var addMarkers = function () {
+            angular.extend($scope, {
+                markers: {
+                    puntoPupero: self.punto
+                }
+            });
+        };
+    }
+
     angular
         .module('geo.controllers')
-//        .controller('PostCreateCtrl', PostCreateCtrl)
-//        .controller('PostDetailCtrl', PostDetailCtrl)
+        .controller('GeoCreateCtrl', GeoCreateCtrl)
+        .controller('GeoCercanosCtrl', GeoCercanosCtrl)
         .controller('GeoListCtrl', GeoListCtrl)
     ;
 })();
