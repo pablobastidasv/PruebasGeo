@@ -11,17 +11,21 @@
         $scope.markers = new Array();
 
         $http.get(BaseUrl + '/geo/'+$routeParams.geoId+'/cercanos')
-            .success(function(data){
-                data.forEach(function(punto){
-                    $scope.markers.push({
-                        lat: punto.lat,
-                        lng: punto.lng,
-                        message: punto.nombre
-                    });
+            .success(dibujarCercanos).error(errorEnTransaccion);
+
+        function dibujarCercanos(data){
+            data.forEach(function(punto){
+                $scope.markers.push({
+                    lat: punto.lat,
+                    lng: punto.lng,
+                    message: punto.nombre
                 });
-            }).error(function(data, status){
-                console.log(status + ": " + data);
             });
+        }
+
+        function errorEnTransaccion(data, status){
+            console.log(status + ": " + data);
+        }
     }
 
     function GeoCreateCtrl($scope, Geo) {
