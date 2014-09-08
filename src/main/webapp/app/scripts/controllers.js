@@ -7,18 +7,19 @@
         this.puntos = Geo.query();
     }
 
-    function GeoCercanosCtrl ($routeParams, $scope, Geo){
+    function GeoCercanosCtrl ($routeParams, $scope, $http, BaseUrl){
         var self = this;
-        Geo.query({id:$routeParams.geoId})
-            .$promise.then(
-                function(data){
-                    self.puntos = data;
 
-                    $scope.$on('leafletDirectiveMap.load', function(){
-                        $scope.markers.push(self.puntos);
-                    });
-                }
-        );
+        $http.get(BaseUrl + '/geo/'+$routeParams.geoId+'/cercanos')
+            .success(function(data){
+                self.puntos = data;
+
+                $scope.$on('leafletDirectiveMap.load', function(){
+                    $scope.markers.push(self.puntos);
+                });
+            }).error(function(data, status){
+                console.log(status + ": " + data);
+            });
     }
 
     function GeoCreateCtrl($scope, Geo) {

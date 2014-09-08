@@ -4,12 +4,9 @@ import ar.com.conexia.prueba.geo.dtos.GeoPointDTO;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,6 +39,15 @@ public class GeoService {
     public Response getPoint( @PathParam("pointID") Long pointID ){
         return Response.ok()
                 .entity(storage.get(pointID))
+                .header("Access-Control-Allow-Origin", "*")
+                .build();
+    }
+
+    @GET
+    @Path("{pointID}/cercanos")
+    public Response getCercanos( @PathParam("pointID") Long pointID){
+        return Response.ok()
+                .entity(storage.values())
                 .header("Access-Control-Allow-Origin", "*")
                 .build();
     }
