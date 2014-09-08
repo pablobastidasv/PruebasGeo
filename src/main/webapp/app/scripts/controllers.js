@@ -8,14 +8,16 @@
     }
 
     function GeoCercanosCtrl ($routeParams, $scope, $http, BaseUrl){
-        var self = this;
+        $scope.markers = new Array();
 
         $http.get(BaseUrl + '/geo/'+$routeParams.geoId+'/cercanos')
             .success(function(data){
-                self.puntos = data;
-
-                $scope.$on('leafletDirectiveMap.load', function(){
-                    $scope.markers.push(self.puntos);
+                data.forEach(function(punto){
+                    $scope.markers.push({
+                        lat: punto.lat,
+                        lng: punto.lng,
+                        message: punto.nombre
+                    });
                 });
             }).error(function(data, status){
                 console.log(status + ": " + data);

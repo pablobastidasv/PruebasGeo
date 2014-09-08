@@ -1,5 +1,7 @@
 package ar.com.conexia.prueba.geo.dtos;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Created by pbastidas on 5/09/14.
  */

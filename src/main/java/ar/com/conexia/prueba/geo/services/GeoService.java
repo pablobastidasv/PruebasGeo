@@ -23,14 +23,14 @@ public class GeoService {
     @PostConstruct
     public void init(){
         storage=new HashMap<>();
-        storage.put(1L, new GeoPointDTO(1L, "Punto", 4.69904478078438F,-74.05132416305534F));
+        storage.put(1L, new GeoPointDTO(1L, "Punto 1", 4.69904478078438F,-74.05132416305534F));
+        storage.put(2L, new GeoPointDTO(2L, "Punto 2", 26.25732421875F,-32.54681317351514F));
     }
 
     @GET
     public Response getPoints(){
         return Response.ok()
                 .entity(storage.values())
-                .header("Access-Control-Allow-Origin", "*")
                 .build();
     }
 
@@ -39,7 +39,6 @@ public class GeoService {
     public Response getPoint( @PathParam("pointID") Long pointID ){
         return Response.ok()
                 .entity(storage.get(pointID))
-                .header("Access-Control-Allow-Origin", "*")
                 .build();
     }
 
@@ -48,7 +47,13 @@ public class GeoService {
     public Response getCercanos( @PathParam("pointID") Long pointID){
         return Response.ok()
                 .entity(storage.values())
-                .header("Access-Control-Allow-Origin", "*")
                 .build();
+    }
+
+    @POST
+    public Response crear( GeoPointDTO point ){
+        System.out.println(point);
+
+        return Response.ok().build();
     }
 }
