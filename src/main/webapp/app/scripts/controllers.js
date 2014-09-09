@@ -7,11 +7,13 @@
         this.puntos = Geo.query();
     }
 
-    function GeoCercanosCtrl ($routeParams, $scope, $http, BaseUrl){
-        $scope.markers = new Array();
+    function GeoCercanosCtrl ($routeParams, $scope, Geo){
+        $scope.markers = [];
 
-        $http.get(BaseUrl + '/geo/'+$routeParams.geoId+'/cercanos')
-            .success(dibujarCercanos).error(errorEnTransaccion);
+//        $http.get(BaseUrl + '/geo/'+$routeParams.geoId+'/cercanos')
+//            .success(dibujarCercanos).error(errorEnTransaccion);
+
+        Geo.cercanos($routeParams.geoId, dibujarCercanos, errorEnTransaccion);
 
         function dibujarCercanos(data){
             data.forEach(function(punto){
