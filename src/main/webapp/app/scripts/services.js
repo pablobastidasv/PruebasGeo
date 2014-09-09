@@ -3,7 +3,7 @@
 
     angular.module('geo.services', ['ngResource']);
 
-    function Geo($resource, BaseUrl){
+    function Geo($resource, $http, BaseUrl){
         var geoResource = $resource(BaseUrl + '/geo/:geoId',{geoId:'@_id'});
 
         geoResource.cercanos = function(pointId, dibujarCercanos, errorEnTransaccion){
