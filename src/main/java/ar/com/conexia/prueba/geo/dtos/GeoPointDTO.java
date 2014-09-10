@@ -1,5 +1,8 @@
 package ar.com.conexia.prueba.geo.dtos;
 
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.Point;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -8,8 +11,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class GeoPointDTO {
     private Long pointId;
     private String nombre;
-    private Float lat;
-    private Float lng;
+    private Double lat;
+    private Double lng;
 
     public GeoPointDTO() {
     }
@@ -18,11 +21,12 @@ public class GeoPointDTO {
         this.pointId = pointId;
     }
 
-    public GeoPointDTO(Long pointId, String nombre, Float lat, Float lng) {
-        this.pointId = pointId;
+    public GeoPointDTO(Long pointId, String nombre, Geometry geometry) {
+        Point localizacion = geometry.getFactory().createPoint(geometry.getCoordinate());
+        this.pointId =pointId;
         this.nombre = nombre;
-        this.lat = lat;
-        this.lng = lng;
+        this.lat = localizacion.getX();
+        this.lng = localizacion.getY();
     }
 
     public Long getPointId() {
@@ -41,19 +45,19 @@ public class GeoPointDTO {
         this.nombre = nombre;
     }
 
-    public Float getLat() {
+    public Double getLat() {
         return lat;
     }
 
-    public void setLat(Float lat) {
+    public void setLat(Double lat) {
         this.lat = lat;
     }
 
-    public Float getLng() {
+    public Double getLng() {
         return lng;
     }
 
-    public void setLng(Float lng) {
+    public void setLng(Double lng) {
         this.lng = lng;
     }
 
