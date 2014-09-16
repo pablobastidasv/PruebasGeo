@@ -13,7 +13,7 @@
         $scope.center =  {
             lng: -74.09774065017699,
             lat: 4.689351250132947,
-            zoom:10,
+            zoom:10
         };
 
         function dibujarCercanos(data){
