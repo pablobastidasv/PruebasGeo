@@ -1,0 +1,10 @@
+<h1>Ubicaciones registradas</h1>
+
+<leaflet height="480px" markers="geohome.puntos" center="geohome.center" ></leaflet>
+
+
+<ul class="blog-post-list">
+    <li class="blog-post-link" ng-repeat="geo in geohome.puntos">
+       {{ geo.nombre }}<small>(lat: {{ geo.lat }}, lng: {{geo.lng}})</small>.
+    </li>
+</ul>

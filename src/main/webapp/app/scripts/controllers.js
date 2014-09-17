@@ -7,24 +7,36 @@
         this.puntos = Geo.query();
     }
 
-    function GeoCercanosCtrl ($routeParams, $scope, Geo){
-        $scope.markers = [];
+    function GeoHomeCtrl(Geo) {
+        this.puntos = Geo.query();
 
-        $scope.center =  {
+        this.center =  {
+            lng: -74.05380204319954,
+            lat: 4.706759110504577,
+            zoom:14
+        };
+    }
+
+    function GeoCercanosCtrl ($routeParams, Geo){
+        this.markers = [];
+
+        this.center =  {
             lng: -74.09774065017699,
             lat: 4.689351250132947,
             zoom:10
         };
 
+        var self = this;
+
         function dibujarCercanos(data){
-            $scope.center =  {
+            self.center =  {
                 lng: data.centro.lng,
                 lat: data.centro.lat,
                 zoom: 15
             };
 
             data.cercanos.forEach(function(punto){
-                $scope.markers.push({
+                self.markers.push({
                     lat: punto.lat,
                     lng: punto.lng,
                     message: punto.nombre,
@@ -35,7 +47,7 @@
                 });
             });
 
-            $scope.markers.push({
+            self.markers.push({
                 lat: data.centro.lat,
                 lng: data.centro.lng,
                 message: data.centro.nombre,
@@ -97,6 +109,7 @@
 
     angular
         .module('geo.controllers')
+        .controller('GeoHomeCtrl', GeoHomeCtrl)
         .controller('GeoCreateCtrl', GeoCreateCtrl)
         .controller('GeoCercanosCtrl', GeoCercanosCtrl)
         .controller('GeoListCtrl', GeoListCtrl)
