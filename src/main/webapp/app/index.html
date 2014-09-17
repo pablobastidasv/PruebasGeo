@@ -27,13 +27,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <aside class="col-sm-2">
-            <ul class="nav nav-pills nav-stacked">
-                <li><a ng-href="/">Home</a></li>
-                <li><a ng-href="/list">Buscar cercanos</a></li>
-                <li><a ng-href="/new">Crear ubicación</a></li>
-            </ul>
-        </aside>
+        <aside class="col-sm-2" ng-include="'/views/nav.tpl.html'"></aside>
         <section class="col-sm-9" ng-view></section>
     </div>
 </div>
